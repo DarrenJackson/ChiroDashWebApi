@@ -53,14 +53,9 @@ namespace ChiroDashWebApi.Doctors
 
         public Doctor UpdateDoctorById(int id, Doctor updatedDoctor)
         {
-            if (doctors.ContainsKey(id))
-            {
-                updatedDoctor.Id = id;
-                doctors[id] = updatedDoctor;
-                return doctors[id];
-            }
-
-            return null;
+            updatedDoctor.Id = id;
+            doctors[id] = updatedDoctor;
+            return doctors[id];
         }
 
         public Doctor DeleteDoctorById(int id)

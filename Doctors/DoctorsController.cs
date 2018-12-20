@@ -14,7 +14,7 @@ namespace ChiroDashWebApi.Doctors
             this.service = service;
         }
 
-        // GET: api/doctors
+        // GET: api/Doctors
         [HttpGet]
         public ActionResult<IEnumerable<Doctor>> Get()
         {
@@ -28,7 +28,7 @@ namespace ChiroDashWebApi.Doctors
             return doctors.Values;
         }
 
-        // GET: api/Doctor/5
+        // GET: api/Doctors/5
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<Doctor> Get(int id)
         {
@@ -42,7 +42,7 @@ namespace ChiroDashWebApi.Doctors
             return doctor;
         }
 
-        // POST: api/Doc
+        // POST: api/Doctors
         [HttpPost]
         public ActionResult<Doctor> Post([FromBody] Doctor newDoctor)
         {
@@ -57,11 +57,11 @@ namespace ChiroDashWebApi.Doctors
             return doctor;
         }
 
-        // PUT: api/Doc/5
+        // PUT: api/Doctors/5
         [HttpPut("{id}")]
-        public ActionResult<Doctor> Put(int id, [FromBody] Doctor updatedDoctor)
+        public ActionResult<Doctor> Put(int id, [FromBody] Doctor newDoctor)
         {
-            var doctor = service.UpdateDoctorById(id, updatedDoctor);
+            var doctor = service.UpdateDoctorById(id, newDoctor);
 
             if (doctor == null)
             {
@@ -71,7 +71,7 @@ namespace ChiroDashWebApi.Doctors
             return doctor;
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Doctors/5
         [HttpDelete("{id}")]
         public ActionResult<Doctor> Delete(int id)
         {
