@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using ChiroDashWebApi.Models;
-using Microsoft.AspNetCore.Mvc;
 
-namespace ChiroDashWebApi.Services
+namespace ChiroDashWebApi.Doctors
 {
     public interface IDoctorServices
     {

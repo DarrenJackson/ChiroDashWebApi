@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ChiroDashWebApi.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
 
-namespace ChiroDashWebApi.Services
+namespace ChiroDashWebApi.Doctors
 {
     public class DoctorServices : IDoctorServices
     {
