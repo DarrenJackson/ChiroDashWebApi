@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ChiroDashWebApi.Doctors
 {
@@ -8,7 +9,7 @@ namespace ChiroDashWebApi.Doctors
 
         Dictionary<int, Doctor> GetDoctors();
 
-        Doctor GetDoctorById(int id);
+        Task<Doctor> GetDoctorById(int id);
 
         Doctor UpdateDoctorById(int id, Doctor updatedDoctor);
 
