@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ChiroDashWebApi.Doctors
@@ -30,9 +31,9 @@ namespace ChiroDashWebApi.Doctors
 
         // GET: api/Doctors/5
         [HttpGet("{id}", Name = "Get")]
-        public ActionResult<Doctor> Get(int id)
+        public async Task<ActionResult<Doctor>> Get(int id)
         {
-            var doctor = service.GetDoctorById(id);
+            var doctor = await service.GetDoctorById(id);
 
             if (doctor == null)
             {

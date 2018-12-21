@@ -16,6 +16,7 @@ namespace ChiroDashWebApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSingleton<IDoctorServices, DoctorServices>();
+            services.AddTransient<IDoctorRepository, DoctorRepository>();
 
             services.AddSwaggerGen(c =>
             {

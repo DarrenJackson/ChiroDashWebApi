@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ChiroDashWebApi.Doctors
 {
     public class DoctorServices : IDoctorServices
     {
+        private readonly IDoctorRepository repo;
         private readonly Dictionary<int, Doctor> doctors = new Dictionary<int, Doctor>();
         private int currentId = 0;
 
-        public DoctorServices()
+        public DoctorServices(IDoctorRepository repo)
         {
+            this.repo = repo;
             var newId = currentId++;
             doctors[newId] = new Doctor()
             {
@@ -45,10 +48,11 @@ namespace ChiroDashWebApi.Doctors
             return doctors;
         }
 
-        public Doctor GetDoctorById(int id)
+        public async Task<Doctor> GetDoctorById(int id)
         {
-            doctors.TryGetValue(id, out var doctor);
-            return doctor;
+            return await repo.GetById(id);
+            //doctors.TryGetValue(id, out var doctor);
+            //return doctor;
         }
 
         public Doctor UpdateDoctorById(int id, Doctor updatedDoctor)
