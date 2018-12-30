@@ -1,4 +1,4 @@
-﻿namespace ChiroDashWebApi.Doctors
+﻿namespace ChiroDash.Domain.Entities
 {
     public class Doctor
     {
