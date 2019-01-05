@@ -65,10 +65,10 @@ namespace ChiroDash.WebUI.Controllers
                 return BadRequest();
             }
 
-            var doctor = AutoMapper.Mapper.Map<Doctor>(doctorToCreate);
+            var employee = AutoMapper.Mapper.Map<Employee>(doctorToCreate);
 
             var addCommand = new AddDoctorCommand(config);
-            var createdDoctor = await addCommand.Execute(doctor);
+            var (createdDoctor, target) = await addCommand.Execute(employee);
 
             return CreatedAtRoute("GetDoctor", new { id = createdDoctor.Id }, createdDoctor);
         }

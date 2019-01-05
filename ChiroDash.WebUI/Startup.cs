@@ -39,6 +39,7 @@ namespace ChiroDash.WebUI
             AutoMapper.Mapper.Initialize(
                 config =>
                 {
+
                     config.CreateMap<Doctor, DoctorDto>();
                     config.CreateMap<Target, TargetDto>();
                     config.CreateMap<Scorecard, ScorecardDto>();
@@ -48,6 +49,8 @@ namespace ChiroDash.WebUI
                     config.CreateMap<DoctorToUpdateDto, Doctor>();
                     config.CreateMap<TargetToCreateDto, Target>();
                     config.CreateMap<TargetToUpdateDto, Target>();
+
+                    config.CreateMap<DoctorToCreateDto, Employee>();
                 });
 
             app.UseHttpsRedirection();
