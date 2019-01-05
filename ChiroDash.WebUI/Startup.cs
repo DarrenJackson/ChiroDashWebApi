@@ -1,11 +1,14 @@
-﻿using ChiroDashWebApi.Doctors;
+﻿using ChiroDash.Application.Doctors.Models;
+using ChiroDash.Application.Scorecards.Models;
+using ChiroDash.Application.Targets.Models;
+using ChiroDash.Domain.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace ChiroDashWebApi
+namespace ChiroDash.WebUI
 {
     public class Startup
     {
@@ -14,9 +17,6 @@ namespace ChiroDashWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddSingleton<IDoctorServices, DoctorServices>();
-            services.AddTransient<IDoctorRepository, DoctorRepository>();
 
             services.AddSwaggerGen(c =>
             {
@@ -35,6 +35,20 @@ namespace ChiroDashWebApi
             {
                 app.UseHsts();
             }
+
+            AutoMapper.Mapper.Initialize(
+                config =>
+                {
+                    config.CreateMap<Doctor, DoctorDto>();
+                    config.CreateMap<Target, TargetDto>();
+                    config.CreateMap<Scorecard, ScorecardDto>();
+                    config.CreateMap<ScorecardToCreateDto, Scorecard>();
+                    config.CreateMap<ScorecardToUpdateDto, Scorecard>();
+                    config.CreateMap<DoctorToCreateDto, Doctor>();
+                    config.CreateMap<DoctorToUpdateDto, Doctor>();
+                    config.CreateMap<TargetToCreateDto, Target>();
+                    config.CreateMap<TargetToUpdateDto, Target>();
+                });
 
             app.UseHttpsRedirection();
             app.UseSwagger();
