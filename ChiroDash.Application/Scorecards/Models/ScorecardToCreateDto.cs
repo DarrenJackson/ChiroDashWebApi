@@ -7,6 +7,7 @@ namespace ChiroDash.Application.Scorecards.Models
     public class ScorecardToCreateDto
     {
         public DateTimeOffset DateTime { get; set; }
+        public string AssistantId { get; set; }
         public string PatientName { get; set; }
         public bool SpousePresent { get; set; }
         public int AdjustmentsOnPlan { get; set; }
