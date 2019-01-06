@@ -50,6 +50,7 @@ namespace ChiroDash.WebUI
                     config.CreateMap<TargetToCreateDto, Target>();
                     config.CreateMap<TargetToUpdateDto, Target>();
 
+                    config.CreateMap<Employee, DoctorDto>();
                     config.CreateMap<DoctorToCreateDto, Employee>();
                 });
 
