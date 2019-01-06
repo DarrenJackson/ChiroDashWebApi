@@ -20,12 +20,18 @@ namespace ChiroDash.Application.Doctors.Queries
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<Doctor> Execute(string id)
+        public async Task<Employee> Execute(string id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
-                var result = await conn.GetAsync<Doctor>(id);
+                var sql = @"SELECT * 
+                            FROM Employee AS e 
+                            JOIN Department_Employee as de on e.Id = de.EmployeeId
+                            WHERE de.DepartmentId = 1
+                            AND e.Id = @Id";
+
+                var result = await conn.QuerySingleOrDefaultAsync<Employee>(sql, new { id });
                 return result;
             }
         }

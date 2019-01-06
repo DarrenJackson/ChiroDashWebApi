@@ -21,7 +21,7 @@ namespace ChiroDash.Application.Doctors.Commands
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<bool> Execute(Doctor doctor)
+        public async Task<bool> Execute(Employee doctor)
         {
             using (var conn = Connection)
             {
@@ -41,13 +41,15 @@ namespace ChiroDash.Application.Doctors.Commands
                         var sql = "DELETE FROM Target WHERE DoctorId = @Id";
                         await conn.ExecuteAsync(sql, new { doctor.Id }, trans);
 
-                        //sql = "DELETE FROM Scorecard WHERE Doctor = @Id";
-                        //await conn.ExecuteAsync(sql, new { doctor.Id }, trans);
+                        sql = "DELETE FROM Department_Employee WHERE EmployeeId = @Id";
+                        await conn.ExecuteAsync(sql, new { doctor.Id }, trans);
+                        
+                        sql = "DELETE FROM Scorecard WHERE DoctorId = @Id";
+                        await conn.ExecuteAsync(sql, new { doctor.Id }, trans);
 
                         trans.Commit();
 
                         return true;
-
                     }
                     catch (Exception e)
                     {
