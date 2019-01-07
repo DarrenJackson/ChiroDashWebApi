@@ -27,14 +27,10 @@ namespace ChiroDash.Application.Targets.Queries
             {
                 conn.Open();
                 var sql = @"SELECT * FROM Target AS T 
-                            INNER JOIN Doctor AS D ON T.DoctorId = D.Id";
-                var targets = await conn.QueryAsync<Target, Doctor, Target>(
+                            INNER JOIN Employee AS D ON T.DoctorId = D.Id";
+                var targets = await conn.QueryAsync<Target, Employee, Target>(
                     sql,
-                    (target, doctor) =>
-                    {
-                        //target.Doctor = doctor;
-                        return target;
-                    });
+                    (target, doctor) => target);
 
                 return targets.ToList();
             }

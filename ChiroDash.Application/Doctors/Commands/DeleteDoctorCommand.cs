@@ -31,7 +31,7 @@ namespace ChiroDash.Application.Doctors.Commands
                     try
                     {
                         var isDeleted = conn.Delete(doctor, trans);
-                        //var sql = "DELETE FROM Doctor WHERE ID = @Id";
+                        //var sql = "DELETE FROM Employee WHERE ID = @Id";
                         //var rowCount = await conn.ExecuteAsync(sql, new { id }, trans);
                         if (!isDeleted)
                         {

@@ -32,12 +32,12 @@ namespace ChiroDash.Application.Scorecards.Queries
                     var scorecard = await conn.QuerySingleOrDefaultAsync<Scorecard>(sql, new { ID = id, DoctorID = doctorId });
                     return scorecard;
                 //var sql = @"SELECT * FROM Scorecard AS S 
-                //            INNER JOIN Doctor AS D ON S.DoctorId = D.Id WHERE S.Id = @ID";
-                //var result = await conn.QueryAsync<Scorecard, Doctor, Scorecard>(
+                //            INNER JOIN Employee AS D ON S.DoctorId = D.Id WHERE S.Id = @ID";
+                //var result = await conn.QueryAsync<Scorecard, Employee, Scorecard>(
                 //    sql, 
                 //    (card, doctor) =>
                 //    {
-                //        //card.Doctor = doctor;
+                //        //card.Employee = doctor;
                 //        return card;
                 //    }, new { ID = id});
 

@@ -33,37 +33,6 @@ namespace ChiroDash.Application.Scorecards.Commands
                         await conn.UpdateAsync(scorecard, trans);
                         trans.Commit();
                         return true;
-                        // Can we use the Scorecard entity and somehow map Doctor
-
-                        //var sql = @"UPDATE Scorecard SET 
-                        //              PatientName = @PatientName,
-                        //              AdjustmentsOnPlan = @AdjustmentsOnPlan, 
-                        //              SpousePresent = @SpousePresent,
-                        //              PrePayed = @PrePayed,
-                        //              PreBooked = @PreBooked,
-                        //              DidBeginCare = @DidBeginCare,
-                        //              WorkshopBooked = @WorkshopBooked,
-                        //              WorkshopAttended = @WorkshopAttended,
-                        //              DocDidRof = @DocDidRof,
-                        //              MindfitBooked = @MindfitBooked 
-                        //          WHERE Id = @ID";
-
-
-                        //var rows = await conn.ExecuteAsync(sql, new
-                        //{
-                        //    ID = id,
-                        //    scorecard.PatientName,
-                        //    scorecard.AdjustmentsOnPlan,
-                        //    scorecard.DidBeginCare,
-                        //    scorecard.DocDidRof,
-                        //    scorecard.MindfitBooked,
-                        //    scorecard.PreBooked,
-                        //    scorecard.PrePayed,
-                        //    scorecard.SpousePresent,
-                        //    scorecard.WorkshopAttended,
-                        //    scorecard.WorkshopBooked
-                        //}, trans);
-
                     }
                     catch (Exception e)
                     {

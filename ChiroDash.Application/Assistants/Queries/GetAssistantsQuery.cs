@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ChiroDash.Domain.Entities;
 using Dapper;
-using DapperExtensions;
 using Microsoft.Extensions.Configuration;
 
-namespace ChiroDash.Application.Doctors.Queries
+namespace ChiroDash.Application.Assistants.Queries
 {
-    public class GetDoctorsQuery
+    public class GetAssistantsQuery
     {
         private readonly IConfiguration config;
 
-        public GetDoctorsQuery(IConfiguration config)
+        public GetAssistantsQuery(IConfiguration config)
         {
             this.config = config;
         }
@@ -34,7 +33,7 @@ namespace ChiroDash.Application.Doctors.Queries
                     var sql = @"SELECT * 
                                 FROM Employee AS e 
                                 JOIN Department_Employee as de on e.Id = de.EmployeeId
-                                WHERE de.DepartmentId = 0";
+                                WHERE de.DepartmentId = 1";
 
                     var result = await conn.QueryAsync<Employee>(sql);
                     return result;

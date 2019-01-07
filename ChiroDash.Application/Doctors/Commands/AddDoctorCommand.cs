@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading.Tasks;
-using ChiroDash.Application.Doctors.Models;
 using ChiroDash.Domain.Entities;
 using Dapper;
 using DapperExtensions;
-using DapperExtensions.Mapper;
 using Microsoft.Extensions.Configuration;
 
 namespace ChiroDash.Application.Doctors.Commands
@@ -48,7 +45,7 @@ namespace ChiroDash.Application.Doctors.Commands
                         var sql = @"INSERT INTO DEPARTMENT_EMPLOYEE 
                                     SELECT @doctorId, Id 
                                     FROM Department 
-                                    WHERE Name = 'Doctor'";
+                                    WHERE Name = 'Employee'";
                         await conn.ExecuteAsync(sql, new { doctorId }, trans);
 
 

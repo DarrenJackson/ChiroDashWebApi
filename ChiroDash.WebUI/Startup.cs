@@ -1,4 +1,5 @@
-﻿using ChiroDash.Application.Doctors.Models;
+﻿using ChiroDash.Application.Assistants.Models;
+using ChiroDash.Application.Doctors.Models;
 using ChiroDash.Application.Scorecards.Models;
 using ChiroDash.Application.Targets.Models;
 using ChiroDash.Domain.Entities;
@@ -40,19 +41,18 @@ namespace ChiroDash.WebUI
                 config =>
                 {
 
-                    config.CreateMap<Doctor, DoctorDto>();
                     config.CreateMap<Target, TargetDto>();
                     config.CreateMap<Scorecard, ScorecardDto>();
                     config.CreateMap<ScorecardToCreateDto, Scorecard>();
                     config.CreateMap<ScorecardToUpdateDto, Scorecard>();
-                    config.CreateMap<DoctorToCreateDto, Doctor>();
-                    config.CreateMap<DoctorToUpdateDto, Doctor>();
                     config.CreateMap<TargetToCreateDto, Target>();
                     config.CreateMap<TargetToUpdateDto, Target>();
 
                     config.CreateMap<Employee, DoctorDto>();
                     config.CreateMap<DoctorToUpdateDto, Employee>();
                     config.CreateMap<DoctorToCreateDto, Employee>();
+
+                    config.CreateMap<Employee, AssistantDto>();
                 });
 
             app.UseHttpsRedirection();
