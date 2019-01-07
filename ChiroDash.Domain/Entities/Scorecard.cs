@@ -8,6 +8,7 @@ namespace ChiroDash.Domain.Entities
 
         public int Id { get; set; }
         public DateTimeOffset DateTime { get; set; }
+        public string AssistantId { get; set; }
         public string DoctorId { get; set; }
         public string PatientName { get; set; }
         public bool SpousePresent { get; set; }
