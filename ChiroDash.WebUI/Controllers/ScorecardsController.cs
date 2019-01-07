@@ -5,6 +5,7 @@ using ChiroDash.Application.Scorecards.Commands;
 using ChiroDash.Application.Scorecards.Models;
 using ChiroDash.Application.Scorecards.Queries;
 using ChiroDash.Domain.Entities;
+using ChiroDash.Domain.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -22,11 +23,11 @@ namespace ChiroDash.WebUI.Controllers
         }
 
         // GET: api/doctors/1/Scorecards
-        [HttpGet(Name = "GetScorecardsForDoctor")]
-        public async Task<ActionResult<IEnumerable<ScorecardDto>>> Get(string doctorId)
+        [HttpGet(Name = "GetScorecardsByMonthForDoctor")]
+        public async Task<ActionResult<IEnumerable<ScorecardDto>>> GetScorecardsForDoctor(string doctorId, [FromQuery] ScorecardsResourceParameters resourceParams)
         {
             var getQuery = new GetScorecardsQuery(config);
-            var cards = await getQuery.Execute(doctorId);
+            var cards = await getQuery.Execute(doctorId, resourceParams);
 
             if (cards == null)
             {
@@ -39,10 +40,9 @@ namespace ChiroDash.WebUI.Controllers
             return Ok(cardsDto);
         }
 
-
         // GET: api/doctors/5/Scorecards/2
         [HttpGet("{id}", Name = "GetScorecardForDoctor")]
-        public async Task<ActionResult<ScorecardDto>> GetScorecardsForDoctor(string doctorId, string id)
+        public async Task<ActionResult<ScorecardDto>> GetScorecardForDoctor(string doctorId, string id)
         {
             if (id == null)
             {
