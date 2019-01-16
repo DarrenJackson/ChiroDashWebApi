@@ -43,9 +43,7 @@ namespace ChiroDash.Application.Doctors.Commands
 
                         // Add DEPARTMENT_EMPLOYEE 
                         var sql = @"INSERT INTO DEPARTMENT_EMPLOYEE 
-                                    SELECT @doctorId, Id 
-                                    FROM Department 
-                                    WHERE Name = 'Employee'";
+                                    VALUES (@doctorId, 0)";
                         await conn.ExecuteAsync(sql, new { doctorId }, trans);
 
 

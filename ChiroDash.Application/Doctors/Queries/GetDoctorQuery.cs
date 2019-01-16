@@ -28,7 +28,7 @@ namespace ChiroDash.Application.Doctors.Queries
                 var sql = @"SELECT * 
                             FROM Employee AS e 
                             JOIN Department_Employee as de on e.Id = de.EmployeeId
-                            WHERE de.DepartmentId = 1
+                            WHERE de.DepartmentId = 0
                             AND e.Id = @Id";
 
                 var result = await conn.QuerySingleOrDefaultAsync<Employee>(sql, new { id });
