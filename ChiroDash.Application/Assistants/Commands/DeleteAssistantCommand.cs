@@ -1,19 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 using System.Threading.Tasks;
 using ChiroDash.Domain.Entities;
 using Dapper;
 using DapperExtensions;
 using Microsoft.Extensions.Configuration;
 
-namespace ChiroDash.Application.Doctors.Commands
+namespace ChiroDash.Application.Assistants.Commands
 {
-    public class DeleteDoctorCommand
+    public class DeleteAssistantCommand
     {
         private readonly IConfiguration config;
 
-        public DeleteDoctorCommand(IConfiguration config)
+        public DeleteAssistantCommand(IConfiguration config)
         {
             this.config = config;
         }
@@ -21,7 +23,7 @@ namespace ChiroDash.Application.Doctors.Commands
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<bool> Execute(Doctor doctor)
+        public async Task<bool> Execute(Assistant assistant)
         {
             using (var conn = Connection)
             {
@@ -30,19 +32,11 @@ namespace ChiroDash.Application.Doctors.Commands
                 {
                     try
                     {
-                        var isDeleted = conn.Delete(doctor, trans);
-                        //var sql = "DELETE FROM Employee WHERE ID = @Id";
-                        //var rowCount = await conn.ExecuteAsync(sql, new { id }, trans);
+                        var isDeleted = await conn.DeleteAsync(assistant, trans);
                         if (!isDeleted)
                         {
                             return false;
                         }
-
-                        var sql = "DELETE FROM Target WHERE DoctorId = @Id";
-                        await conn.ExecuteAsync(sql, new { doctor.Id }, trans);
-                        
-                        sql = "DELETE FROM Kpi WHERE DoctorId = @Id";
-                        await conn.ExecuteAsync(sql, new { doctor.Id }, trans);
 
                         trans.Commit();
 

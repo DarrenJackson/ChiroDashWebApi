@@ -35,13 +35,8 @@ namespace ChiroDash.WebUI.Controllers
 
         // GET: api/Doctors/5
         [HttpGet("{id}", Name = "GetDoctor")]
-        public async Task<ActionResult<DoctorDto>> GetDoctor(string id)
+        public async Task<ActionResult<DoctorDto>> GetDoctor(int id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
-
             var getQuery = new GetDoctorQuery(config);
             var doctor = await getQuery.Execute(id);
 
@@ -65,22 +60,29 @@ namespace ChiroDash.WebUI.Controllers
                 return BadRequest();
             }
 
-            var employee = AutoMapper.Mapper.Map<Employee>(doctorToCreate);
+            doctorToCreate.Id = 0;
+            var doctor = AutoMapper.Mapper.Map<Doctor>(doctorToCreate);
 
             var addCommand = new AddDoctorCommand(config);
-            var (createdDoctor, target) = await addCommand.Execute(employee);
+            var (createdDoctor, target) = await addCommand.Execute(doctor);
 
             return CreatedAtRoute("GetDoctor", new { id = createdDoctor.Id }, createdDoctor);
         }
 
         // PUT: api/Doctors/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(string id, [FromBody] DoctorToUpdateDto doctorToUpdateDto)
+        public async Task<ActionResult> Put(int id, [FromBody] DoctorToUpdateDto doctorToUpdateDto)
         {
             if (doctorToUpdateDto == null)
             {
                 return BadRequest();
             }
+
+            if (id != doctorToUpdateDto.Id)
+            {
+                return BadRequest();
+            }
+
 
             var getQuery = new GetDoctorQuery(config);
             var doctor = await getQuery.Execute(id);
@@ -99,13 +101,8 @@ namespace ChiroDash.WebUI.Controllers
 
         // DELETE: api/Doctors/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return BadRequest();
-            }
-
             var getQuery = new GetDoctorQuery(config);
             var doctor = await getQuery.Execute(id);
             if (doctor == null)

@@ -22,7 +22,7 @@ namespace ChiroDash.Application.Assistants.Queries
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<IEnumerable<Employee>> Execute()
+        public async Task<IEnumerable<Assistant>> Execute()
         {
             using (var conn = Connection)
             {
@@ -30,12 +30,9 @@ namespace ChiroDash.Application.Assistants.Queries
 
                 try 
                 {
-                    var sql = @"SELECT * 
-                                FROM Employee AS e 
-                                JOIN Department_Employee as de on e.Id = de.EmployeeId
-                                WHERE de.DepartmentId = 1";
+                    var sql = @"SELECT * FROM Assistant";
 
-                    var result = await conn.QueryAsync<Employee>(sql);
+                    var result = await conn.QueryAsync<Assistant>(sql);
                     return result;
                 }
                 catch (Exception e)

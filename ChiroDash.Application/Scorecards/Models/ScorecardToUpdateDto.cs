@@ -10,7 +10,7 @@ namespace ChiroDash.Application.Scorecards.Models
         public string PatientName { get; set; }
         public bool SpousePresent { get; set; }
         public int AdjustmentsOnPlan { get; set; }
-        public bool PrePayed { get; set; }
+        public bool PrePaid { get; set; }
         public int PreBooked { get; set; }
         public bool DidBeginCare { get; set; }
         public bool WorkshopBooked { get; set; }
