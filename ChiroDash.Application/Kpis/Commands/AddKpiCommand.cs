@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading.Tasks;
 using ChiroDash.Domain.Entities;
-using Dapper;
 using DapperExtensions;
 using Microsoft.Extensions.Configuration;
 
-namespace ChiroDash.Application.Scorecards.Commands
+namespace ChiroDash.Application.Kpis.Commands
 {
-    public class AddScorecardCommand
+    public class AddKpiCommand
     {
         private readonly IConfiguration config;
 
-        public AddScorecardCommand(IConfiguration config)
+        public AddKpiCommand(IConfiguration config)
         {
             this.config = config;
         }
@@ -22,7 +20,7 @@ namespace ChiroDash.Application.Scorecards.Commands
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<Scorecard> Execute(Scorecard scorecard)
+        public async Task<Kpi> Execute(Kpi kpi)
         {
             using (var conn = Connection)
             {
@@ -31,9 +29,9 @@ namespace ChiroDash.Application.Scorecards.Commands
                 {
                     try
                     {
-                        scorecard.Id = await conn.InsertAsync(scorecard, trans);
+                        kpi.Id = await conn.InsertAsync(kpi, trans);
                         trans.Commit();
-                        return scorecard;
+                        return kpi;
                     }
                     catch (Exception e)
                     {

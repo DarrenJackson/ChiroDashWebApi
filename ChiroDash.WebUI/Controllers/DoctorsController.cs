@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ChiroDash.Application.Doctors.Commands;
 using ChiroDash.Application.Doctors.Models;
 using ChiroDash.Application.Doctors.Queries;
-using ChiroDash.Application.Scorecards.Queries;
 using ChiroDash.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

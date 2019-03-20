@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ChiroDash.Application.Scorecards.Models
+namespace ChiroDash.Application.Kpis.Models
 {
-    public class ScorecardToCreateDto
+    public class KpiDto
     {
+        public int Id { get; set; }
         public DateTimeOffset DateTime { get; set; }
-        public string AssistantId { get; set; }
+        public int AssistantId { get; set; }
+        public string DoctorId { get; set; }
         public string PatientName { get; set; }
         public bool SpousePresent { get; set; }
         public int AdjustmentsOnPlan { get; set; }

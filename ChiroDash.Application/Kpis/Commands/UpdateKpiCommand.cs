@@ -3,17 +3,16 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using ChiroDash.Domain.Entities;
-using Dapper;
 using DapperExtensions;
 using Microsoft.Extensions.Configuration;
 
-namespace ChiroDash.Application.Scorecards.Commands
+namespace ChiroDash.Application.Kpis.Commands
 {
-    public class DeleteScorecardCommand
+    public class UpdateKpiCommand
     {
         private readonly IConfiguration config;
 
-        public DeleteScorecardCommand(IConfiguration config)
+        public UpdateKpiCommand(IConfiguration config)
         {
             this.config = config;
         }
@@ -21,7 +20,7 @@ namespace ChiroDash.Application.Scorecards.Commands
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<bool> Execute(Scorecard scorecard)
+        public async Task<bool> Execute(Kpi kpi)
         {
             using (var conn = Connection)
             {
@@ -30,12 +29,7 @@ namespace ChiroDash.Application.Scorecards.Commands
                 {
                     try
                     {
-                        var isDeleted = await conn.DeleteAsync(scorecard, trans);
-                        if (!isDeleted)
-                        {
-                            return false;
-                        }
-
+                        await conn.UpdateAsync(kpi, trans);
                         trans.Commit();
                         return true;
                     }

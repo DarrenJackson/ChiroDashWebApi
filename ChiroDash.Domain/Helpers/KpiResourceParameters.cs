@@ -1,6 +1,6 @@
 ﻿namespace ChiroDash.Domain.Helpers
 {
-    public class ScorecardsResourceParameters
+    public class KpiResourceParameters
     {
         public string Year { get; set; }
 
