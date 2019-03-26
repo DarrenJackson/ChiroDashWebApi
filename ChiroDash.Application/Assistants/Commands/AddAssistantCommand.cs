@@ -1,20 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ChiroDash.Domain.Entities;
-using Dapper;
 using DapperExtensions;
 using Microsoft.Extensions.Configuration;
 
-namespace ChiroDash.Application.Scorecards.Commands
+namespace ChiroDash.Application.Assistants.Commands
 {
-    public class AddScorecardCommand
+    public class AddAssistantCommand
     {
         private readonly IConfiguration config;
 
-        public AddScorecardCommand(IConfiguration config)
+        public AddAssistantCommand(IConfiguration config)
         {
             this.config = config;
         }
@@ -22,7 +22,7 @@ namespace ChiroDash.Application.Scorecards.Commands
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<Scorecard> Execute(Scorecard scorecard)
+        public async Task<Assistant> Execute(Assistant assistant)
         {
             using (var conn = Connection)
             {
@@ -31,15 +31,18 @@ namespace ChiroDash.Application.Scorecards.Commands
                 {
                     try
                     {
-                        scorecard.Id = await conn.InsertAsync(scorecard, trans);
+                        // Add ASSISTANT
+                        var doctorId = await conn.InsertAsync(assistant, trans);
+                        assistant.Id = doctorId;
+
                         trans.Commit();
-                        return scorecard;
+                        return assistant;
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
                         trans.Rollback();
-                        throw;
+                        throw; 
                     }
                 }
             }

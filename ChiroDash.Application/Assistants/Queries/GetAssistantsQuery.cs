@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ChiroDash.Domain.Entities;
 using Dapper;
-using DapperExtensions;
 using Microsoft.Extensions.Configuration;
 
-namespace ChiroDash.Application.Doctors.Queries
+namespace ChiroDash.Application.Assistants.Queries
 {
-    public class GetDoctorsQuery
+    public class GetAssistantsQuery
     {
         private readonly IConfiguration config;
 
-        public GetDoctorsQuery(IConfiguration config)
+        public GetAssistantsQuery(IConfiguration config)
         {
             this.config = config;
         }
@@ -23,7 +22,7 @@ namespace ChiroDash.Application.Doctors.Queries
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<IEnumerable<Employee>> Execute()
+        public async Task<IEnumerable<Assistant>> Execute()
         {
             using (var conn = Connection)
             {
@@ -31,8 +30,9 @@ namespace ChiroDash.Application.Doctors.Queries
 
                 try 
                 {
-                    var sql = @"SELECT * FROM Doctor"; 
-                    var result = await conn.QueryAsync<Employee>(sql);
+                    var sql = @"SELECT * FROM Assistant";
+
+                    var result = await conn.QueryAsync<Assistant>(sql);
                     return result;
                 }
                 catch (Exception e)

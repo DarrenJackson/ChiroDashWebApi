@@ -36,21 +36,6 @@ namespace ChiroDash.Application.Targets.Queries
 
                     var target = await conn.QuerySingleOrDefaultAsync<Target>(sql, new { ID = id, DoctorID = doctorId });
                     return target;
-
-                    //var sql = @"SELECT * FROM Target AS T 
-                    //        INNER JOIN Doctor AS D ON T.DoctorId = D.Id 
-                    //        WHERE T.Id = @ID
-                    //        AND D.Id = @DoctorID";
-
-                    //var targets = await conn.QueryAsync<Target, Doctor, Target>(
-                    //    sql,
-                    //    (target, doctor) =>
-                    //    {
-                    //        //target.Doctor = doctor;
-                    //        return target;
-                    //    }, new { ID = id, DoctorID = doctorId });
-
-                    //return targets.FirstOrDefault();
                 }
                 catch (Exception e)
                 {

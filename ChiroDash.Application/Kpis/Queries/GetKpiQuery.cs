@@ -1,18 +1,17 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading.Tasks;
 using ChiroDash.Domain.Entities;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 
-namespace ChiroDash.Application.Scorecards.Queries
+namespace ChiroDash.Application.Kpis.Queries
 {
-    public class GetScorecardQuery
+    public class GetKpiQuery
     {
         private readonly IConfiguration config;
 
-        public GetScorecardQuery(IConfiguration config)
+        public GetKpiQuery(IConfiguration config)
         {
             this.config = config;
         }
@@ -20,24 +19,24 @@ namespace ChiroDash.Application.Scorecards.Queries
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<Scorecard> Execute(string doctorId, string id)
+        public async Task<Kpi> Execute(string doctorId, string id)
         {
             using (var conn = Connection)
             {
                 conn.Open();
-                    var sql = @"SELECT * FROM Scorecard AS S 
+                    var sql = @"SELECT * FROM Kpi AS S 
                                 WHERE S.Id = @ID
                                 AND S.DoctorId = @DoctorID";
 
-                    var scorecard = await conn.QuerySingleOrDefaultAsync<Scorecard>(sql, new { ID = id, DoctorID = doctorId });
-                    return scorecard;
-                //var sql = @"SELECT * FROM Scorecard AS S 
-                //            INNER JOIN Doctor AS D ON S.DoctorId = D.Id WHERE S.Id = @ID";
-                //var result = await conn.QueryAsync<Scorecard, Doctor, Scorecard>(
+                    var kpi = await conn.QuerySingleOrDefaultAsync<Kpi>(sql, new { ID = id, DoctorID = doctorId });
+                    return kpi;
+                //var sql = @"SELECT * FROM Kpi AS S 
+                //            INNER JOIN Employee AS D ON S.DoctorId = D.Id WHERE S.Id = @ID";
+                //var result = await conn.QueryAsync<Kpi, Employee, Kpi>(
                 //    sql, 
                 //    (card, doctor) =>
                 //    {
-                //        //card.Doctor = doctor;
+                //        //card.Employee = doctor;
                 //        return card;
                 //    }, new { ID = id});
 

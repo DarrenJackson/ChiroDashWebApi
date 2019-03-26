@@ -6,7 +6,8 @@ namespace ChiroDash.Application.Doctors.Models
 {
     public class DoctorToCreateDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string AssistantId { get; set; }
+        public bool IsActive { get; set; }
     }
 }

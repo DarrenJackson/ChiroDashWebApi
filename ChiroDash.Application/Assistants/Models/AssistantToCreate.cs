@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ChiroDash.Application.Doctors.Models
+namespace ChiroDash.Application.Assistants.Models
 {
-    public class DoctorToUpdateDto
+    public class AssistantToCreateDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ChiroDash.Application.Scorecards.Models
+namespace ChiroDash.Domain.Entities
 {
-    public class ScorecardToUpdateDto
+    public class Kpi
     {
+        public Kpi() => DateTime = DateTimeOffset.UtcNow;
+
+        public int Id { get; set; }
         public DateTimeOffset DateTime { get; set; }
+        public string AssistantId { get; set; }
+        public string DoctorId { get; set; }
         public string PatientName { get; set; }
         public bool SpousePresent { get; set; }
         public int AdjustmentsOnPlan { get; set; }
-        public bool PrePayed { get; set; }
+        public bool PrePaid { get; set; }
         public int PreBooked { get; set; }
         public bool DidBeginCare { get; set; }
         public bool WorkshopBooked { get; set; }

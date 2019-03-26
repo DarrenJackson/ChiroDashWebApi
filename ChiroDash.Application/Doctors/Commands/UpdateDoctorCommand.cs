@@ -20,7 +20,7 @@ namespace ChiroDash.Application.Doctors.Commands
         public IDbConnection Connection
             => new SqlConnection(config.GetConnectionString("ChiroDashConnectionString"));
 
-        public async Task<bool> Execute(Employee doctor)
+        public async Task<bool> Execute(Doctor doctor)
         {
             using (var conn = Connection)
             {

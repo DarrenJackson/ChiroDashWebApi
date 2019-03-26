@@ -98,21 +98,22 @@ namespace ChiroDash.WebUI.Controllers
             return Ok(target);
         }
 
+        // Targets only deleted when doctor is deleted.
         // DELETE: api/Doctors/1/Targets/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(string doctorId, string id)
-        {
-            var getQuery = new GetTargetQuery(config);
-            var target = await getQuery.Execute(doctorId, id);
-            if (target == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult> Delete(string doctorId, string id)
+        //{
+        //    var getQuery = new GetTargetQuery(config);
+        //    var target = await getQuery.Execute(doctorId, id);
+        //    if (target == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var deleteCommand = new DeleteTargetCommand(config);
-            await deleteCommand.Execute(target);
+        //    var deleteCommand = new DeleteTargetCommand(config);
+        //    await deleteCommand.Execute(target);
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
     }
 }
